@@ -65,7 +65,7 @@ def print_context(exp_lines, got_lines, idx, context=2):
 
 
 def main():
-    inputs = [":help", "test", "love", "summer", ":highlight off", "summer", ":quit"]
+    inputs = ["summer", "this and", ":quit"]
 
     got = run_with_inputs(inputs)
     got_lines = normalize_lines(got)

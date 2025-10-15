@@ -10,7 +10,7 @@ def find_spans(text: str, pattern: str):
 
     spans = []
 
-    # TODO: Copy your solution from part 2 into this function.
+    # ToDo 1: Copy your solution from the last exercise
 
     return spans
 
@@ -71,6 +71,17 @@ def print_results(query: str, results, highlight: bool):
             line_out = ansi_highlight(lm["text"], lm["spans"]) if highlight else lm["text"]
             print("  " + line_out)
 
+def combine_results(result1, result2):
+    # ToDo 2)
+    #  Merge the two search results:
+    #         - the number of matches,
+    #         - the spans in the title and
+    #         - the spans found in the individual lines
+    #  Returned the combined search result
+    combined = result1
+
+    return combined
+
 
 def main() -> None:
     highlight = True
@@ -105,14 +116,33 @@ def main() -> None:
             continue
 
         # query
-# TODO (Part 3): Extend the search to support multiple words with logical AND.
-# Steps:
-#  1) Split the raw input into words (e.g., `words = raw.split()`).
-#  2) For each word, run the same search you see below (currently done once for the whole raw input).
-#  3) Combine the per-word results so that only sonnets that contain *all* words remain.
-#  4) Pass the final combined results to `print_results`.
-        results = [search_sonnet(s, raw) for s in SONNETS]
-        print_results(raw, results, highlight)
+        combined_results = []
+
+        #  ToDo 1) Split the raw input string into words using a built-in method of string
+        words = raw #  ... your code here ...
+
+        for word in words:
+            # Searching for the word in all sonnets
+            results = [search_sonnet(s, word) for s in SONNETS]
+
+            if not combined_results:
+                # No results yet. We store the first list of results in combined_results
+                combined_results = results
+            else:
+                # We have an additional result, we have to merge the two results: loop all sonnets
+                for i in range(len(combined_results)):
+                    # Checking each sonnet individually
+                    combined_result = combined_results[i]
+                    result = results[i]
+
+                    if combined_result["matches"] > 0 and result["matches"] > 0:
+                        # Only if we have matches in both results, we consider the sonnet (logical AND!)
+                        combined_results[i] = combine_results(combined_result, result)
+                    else:
+                        # Not in both. No match!
+                        combined_result["matches"] = 0
+
+        print_results(raw, combined_results, highlight)
 
 if __name__ == "__main__":
     main()

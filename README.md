@@ -3,9 +3,8 @@
 No descriptive exercise text. The spec is the **golden transcript** in
 `part3/tests/snapshot_interaction.txt`.
 
-Students should implement an extension of the current search. The user can enter multiple words to search. Those words are separated by white space (space, tabs, ...). Instead of searching the sonnets for one word, all words given by the user must be present in the sonnet.
-
-As in part 2, when printing the results the words are highlighted in the sonnets and only the matching sonnets are printed.
+Students should implement an extension of the current search. The user can enter multiple words to search. Those words are separated by white space (space, tabs, ...) - ToDo 1. 
+Instead of searching the sonnets for one word, all words given by the user must be present in the sonnet. ToDo 2 is to merge search results for a sonnet, e.g., the search result for "summer" with the search result for "day".
 
 ## Run the app
 
@@ -22,5 +21,6 @@ python -m part3.tests.check_transcript
 ## Where to work
 
 Edit `part3/app.py`:
-- In `find_spans`: **Copy your solution from part 2**.
-- Around line 113: **extend the search** so the app accepts multiple words and shows only sonnets that contain *all* of them (logical AND). Split the raw input into words, search per word, and combine results before handing them to `print_results`.
+- ToDo 1: At line 7: Copy your solution from part 2 into `find_spans`
+- ToDo 2: At line 122: Split the string on white space
+- ToDo 3: At line 74: Implement function `combine_results` to merge two search results
