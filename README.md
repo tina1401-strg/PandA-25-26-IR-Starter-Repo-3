@@ -3,8 +3,11 @@
 No descriptive exercise text. The spec is the **golden transcript** in
 `part3/tests/snapshot_interaction.txt`.
 
-Students should implement an extension of the current search. The user can enter multiple words to search. Those words are separated by white space (space, tabs, ...) - ToDo 1. 
-Instead of searching the sonnets for one word, all words given by the user must be present in the sonnet. ToDo 2 is to merge search results for a sonnet, e.g., the search result for "summer" with the search result for "day".
+Students should implement an extension of the current search. The user can enter multiple words to search. 
+In a first step, the raw query is separated into individual words by white space (space, tabs, ...).
+
+Instead of searching the sonnets for one word, all words given by the user must be present in the sonnet. Consequently, the sonnets are searched for each word given by the user, yielding a search result. 
+These individual results are then merged, e.g., the search result for "summer" with the search result for "day".
 
 ## Run the app
 
