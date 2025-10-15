@@ -72,7 +72,7 @@ def print_results(query: str, results, highlight: bool):
             print("  " + line_out)
 
 def combine_results(result1, result2):
-    # ToDo 2)
+    # ToDo 3)
     #  Merge the two search results:
     #         - the number of matches,
     #         - the spans in the title and
@@ -118,7 +118,7 @@ def main() -> None:
         # query
         combined_results = []
 
-        #  ToDo 1) Split the raw input string into words using a built-in method of string
+        #  ToDo 2) Split the raw input string into words using a built-in method of string
         words = raw #  ... your code here ...
 
         for word in words:
