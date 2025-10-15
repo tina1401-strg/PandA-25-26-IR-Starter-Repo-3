@@ -1,0 +1,55 @@
+PandA IR — Part 3 (Multi-word AND search)
+Type :help for commands. Type :quit to exit.
+
+> :help
+Commands:
+  :help            Show this help text
+  :quit            Exit the program
+  :highlight on|off
+                   Toggle highlighting of matches
+
+Usage:
+  Enter one or more words to search (AND). Examples:
+    love
+    summer day
+
+Notes:
+  - Case-insensitive search
+  - Works over the TITLE and LINES of three sonnets
+  - Print only matching sonnets
+  - Show: "N out of 3 sonnets contain "<word>"."
+  - Use ANSI escape codes for highlighting when enabled
+  - Manual substring scan (no str.find, no 'in' for text search, no regex)
+
+> test
+0 out of 3 sonnets contain "test".
+> love
+3 out of 3 sonnets contain "love".
+
+[1/3] Sonnet 18: Shall I compare thee to a summer's day?
+  Thou art more \x1b[1m\x1b[43mlove\x1b[0mly and more temperate:
+
+[2/3] Sonnet 29: When in disgrace with fortune and men's eyes
+  For thy sweet \x1b[1m\x1b[43mlove\x1b[0m remember'd such wealth brings
+
+[3/3] Sonnet 130: My mistress' eyes are nothing like the sun
+  I \x1b[1m\x1b[43mlove\x1b[0m to hear her speak, yet well I know
+  And yet by heaven, I think my \x1b[1m\x1b[43mlove\x1b[0m as rare,
+> summer day
+1 out of 3 sonnets contain "summer day".
+
+[1/3] Sonnet 18: Shall I compare thee to a \x1b[1m\x1b[43msummer\x1b[0m's day?
+  Shall I compare thee to a \x1b[1m\x1b[43msummer\x1b[0m's day?
+  And \x1b[1m\x1b[43msummer\x1b[0m's lease hath all too short a date:
+  But thy eternal \x1b[1m\x1b[43msummer\x1b[0m shall not fade,
+> :highlight off
+Highlighting OFF
+> summer day
+1 out of 3 sonnets contain "summer day".
+
+[1/3] Sonnet 18: Shall I compare thee to a summer's day?
+  Shall I compare thee to a summer's day?
+  And summer's lease hath all too short a date:
+  But thy eternal summer shall not fade,
+> :quit
+Bye.
