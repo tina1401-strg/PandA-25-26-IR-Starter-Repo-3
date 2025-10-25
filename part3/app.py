@@ -79,6 +79,11 @@ def print_results(query: str, results, highlight: bool):
 
 def combine_results(result1, result2):
     # ToDo 3)
+    # unify spans to avoid duplicated spans in the list; never desired;
+    # appears only if a word is multiple times in pattern input from user
+    def unify_spans(lst):
+        lst = set(lst)
+        return list(lst)
 
     tmp1 = result1["line_matches"]
     tmp2 = result2["line_matches"]
@@ -87,25 +92,22 @@ def combine_results(result1, result2):
         for j in range(len(tmp1)):
             if tmp2[i]["line_no"] == tmp1[j]["line_no"]:
                 tmp1[j]["spans"] += tmp2[i]["spans"]
+                tmp1[j]["spans"] = unify_spans(tmp1[j]["spans"])
                 break
             if len(tmp1)-1 == j:
                 tmp1.append(tmp2[i])
 
-    #tmp1.sort(key=lambda x: x["line_no"])
-
-    result1["matches"] += result2["matches"]
     result1["title_spans"] += result2["title_spans"]
+    result1["title_spans"] = unify_spans(result1["title_spans"])
+
+    # sorting for consistent output; comment line 104 out to run check_transcript
+    tmp1.sort(key=lambda x: x["line_no"])
+
+    # matches only for correct spans
+    result1["matches"] = len(result1["title_spans"]) + sum(len(lm["spans"]) for lm in tmp1)
 
     combined = result1
     return combined
-
-
-
-    #  Merge the two search results:
-    #         - the number of matches,
-    #         - the spans in the title and
-    #         - the spans found in the individual lines
-    #  Returned the combined search result
 
 
 def main() -> None:
